@@ -1,5 +1,7 @@
 #include "stocklisting.h"
+#include <algorithm>
 #include "JsonWriter/jsonwriter.h"
+#include <string>
 
 int StockListing::id = 0;
 
@@ -19,6 +21,9 @@ void readFile(std::string file, std::vector<StockListing*>& list)
     std::vector<std::string> parts;
     while(reader.readNextLine(parts))
     {
+        parts[0].erase(std::remove(parts[0].begin(), parts[0].end(), '"'), parts[0].end());
+        parts[1].erase(std::remove(parts[1].begin(), parts[1].end(), '"'), parts[1].end());
+
         std::string symbol = parts[0];
         std::string name = parts[1];
 
