@@ -5,13 +5,10 @@
 #include "cat.h"
 
 
-namespace CoolJson
+void jsonWrite(Cat& cat, std::string& jsonString, JsonWriter* parent)
 {
-    void jsonWrite(Cat& cat, std::string& jsonString, JsonWriter* parent)
-    {
-        parent->add("name", 3);
-        parent->add("name", cat.name);
-    }
+    parent->add("name", 3);
+    parent->add("name", cat.name);
 }
 
 int main(int argc, char *argv[])
@@ -22,7 +19,7 @@ int main(int argc, char *argv[])
     json.add("myCat",myCat);
     */
 
-    CoolJson::JsonWriter json;
+    JsonWriter json;
     std::string abc = "abc";
     json.add(std::string("num"), abc);
 

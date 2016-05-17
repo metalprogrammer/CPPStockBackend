@@ -9,9 +9,6 @@ struct Cat
     std::string name;
 };
 
-namespace CoolJson
-{
-    void jsonWrite(Cat& cat, std::string& jsonString, JsonWriter* parent);
-}
+void jsonWrite(Cat& cat, std::string& jsonString, JsonWriter* parent);
 
 #endif // CAT_H

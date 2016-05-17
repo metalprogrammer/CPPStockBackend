@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 
-namespace CoolJson
-{
 class JsonWriter;
 
 void jsonWrite(std::string& str, std::string& jsonString, JsonWriter* parent);
@@ -148,7 +146,5 @@ private:
 
 };
 
-
-}
 
 #endif // JSONWRITER_H

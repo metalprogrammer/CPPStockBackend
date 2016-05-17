@@ -19,9 +19,4 @@ private:
 
 };
 
-namespace CoolJson
-{
-    std::string StockDataManager::StockDataJsonGet(std::string symbol);
-}
-
 #endif // STOCKDATAMANAGER_H
