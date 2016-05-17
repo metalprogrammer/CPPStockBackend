@@ -41,13 +41,15 @@ std::string StockDataManager::StockDataJsonGet(std::string symbol)
     JsonWriter jw;
     jw.writeNameLabel(std::string("historicaldatas"));
     jw.objOpen();
+    jw.OverideNextCommaRule();
+    jw.add(std::string("id"), symbol);
     jw.add(std::string("name"), symbol);
 
-    //jw.writeJSONWebFormatArray(symbol, std::string("listofdata"),static_cast<std::vector<HistoricalStockData*>>(data), std::string("stockdatas"));
+    jw.writeIDArray("listofdata", stockList.size());
+    jw.objClose();
 
-    HistoricalStockData temp = *data[0];
+    jw.addArrayPointer("stockdatas",data);
 
-    jw.add("s", *data[0]);
     return jw.jsonStringGet();
 
 }

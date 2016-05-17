@@ -53,7 +53,5 @@ void WebService::handleRequest(QHttpRequest *req, QHttpResponse *resp)
     QString body = QString::fromStdString(serverFunction(list));
     resp->end(body.toUtf8());
 
-    std::cout<<"Connection Handled"<<std::endl;
-    std::cout<<body.arg(req->path()).toStdString()<<std::endl;
     //resp->end(req->path().toUtf8());
 }

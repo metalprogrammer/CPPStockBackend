@@ -20,20 +20,38 @@ int Launch(int argc, char *argv[])
 
     StockDataManager sdm;
 
-    print("a");
 
-    auto response = [&sdm](std::vector<std::string> list)
+    auto response = [&sdm](std::vector<std::string>& list)
     {
-        /*
-         * std::string output = "Args: ";
-            foreach( std::string str, list)
-            {
-                output += str + ", ";
-            }
 
-            return output;
-            */
-        return sdm.StockListJsonGet();
+        std::string output = "Args: ";
+           foreach( std::string str, list)
+           {
+               output += str + ", ";
+           }
+
+           return output;
+/*
+
+        if(list[1] == "stocks")
+        {
+            return sdm.StockListJsonGet();
+        }
+        if(list[1] == "historicaldata")
+        {
+            std::cout<<"historical"<<std::endl;
+            if(list.size() >= 3)
+            {
+                std::cout<<sdm.StockDataJsonGet(list[2])<<std::endl;
+                return sdm.StockDataJsonGet(list[2]);
+            }
+            return std::string("");
+        }
+
+*/
+
+
+        //return std::string("");
     };
 
 
