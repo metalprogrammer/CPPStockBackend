@@ -23,17 +23,14 @@ int Launch(int argc, char *argv[])
 
     auto response = [&sdm](std::vector<std::string>& list)
     {
+       std::cout<<"arg list"<<std::endl;
+       foreach( std::string str, list)
+       {
+           std::cout<<str<<std::endl;
+       }
+       std::cout<<"arg end"<<std::endl;
 
-        std::string output = "Args: ";
-           foreach( std::string str, list)
-           {
-               output += str + ", ";
-           }
-
-           return output;
-/*
-
-        if(list[1] == "stocks")
+        if(list[1] == "stocklistings")
         {
             return sdm.StockListJsonGet();
         }
@@ -48,10 +45,8 @@ int Launch(int argc, char *argv[])
             return std::string("");
         }
 
-*/
 
-
-        //return std::string("");
+        return std::string("");
     };
 
 

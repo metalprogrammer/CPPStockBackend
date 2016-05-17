@@ -45,8 +45,10 @@ std::string StockDataManager::StockDataJsonGet(std::string symbol)
     jw.add(std::string("id"), symbol);
     jw.add(std::string("name"), symbol);
 
-    jw.writeIDArray("listofdata", stockList.size());
+    jw.writeIDArray("listofdata", data.size());
     jw.objClose();
+
+    resetIdCount();
 
     jw.addArrayPointer("stockdatas",data);
 

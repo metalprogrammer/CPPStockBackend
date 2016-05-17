@@ -6,17 +6,21 @@
 
 void YahooFinance::historicalDataGet(std::string symbol, tm* start, tm* end, EXCHANGE exchange, std::vector<HistoricalStockData*> &result)
 {
-    std::cout<<"starturl"<<std::endl;
-    std::string baseUrl = std::string("http://ichart.finance.yahoo.com/table.csv?s=") + symbol + suffixLookUp[exchange];
+    std::cout<<"jhis"<<std::endl;
+    std::cout<<"symbol: "<<symbol<<std::endl;
+    std::string baseUrl = std::string("http://ichart.finance.yahoo.com/table.csv?s=") + symbol;// + suffixLookUp[exchange];
+    std::cout<<"starturl"<<baseUrl<<std::endl;
     baseUrl += std::string("&a=")  + std::to_string(start->tm_mon);
     baseUrl += std::string("&b=")  + std::to_string(start->tm_mday);
     baseUrl += std::string("&c=")  + std::to_string(start->tm_year + 1900);
     baseUrl += std::string("&d=")  + std::to_string(end->tm_mon);
     baseUrl += std::string("&e=")  + std::to_string(end->tm_mday);
     baseUrl += std::string("&f=")  + std::to_string(end->tm_year + 1900);
+    std::cout<<"url:"<<baseUrl<<std::endl;
+
 
     std::string csvResult = httpGet(baseUrl);
-    std::cout<<"url:"<<baseUrl<<std::endl;
+
     std::cout<<"results:"<<csvResult<<std::endl;
 
     std::stringstream stringStream(csvResult);

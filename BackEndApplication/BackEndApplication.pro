@@ -12,9 +12,21 @@ TEMPLATE = app
 INCLUDEPATH += ../
 INCLUDEPATH += ../qhttpserver/src/
 
-LIBS += -L../QtYahooFinanceLib/lib/ -lQtYahooFinance
-LIBS += -L../QtWebServiceApi/lib/ -lWebServiced
+LIBS += -L../QtYahooFinanceLib/lib/
+win32 {
+    debug: LIBS += -lQtYahooFinanced
+    else: LIBS += -lQtYahooFinance
+} else {
+    LIBS += -lQtYahooFinance
+}
 
+LIBS += -L../QtWebServiceApi/lib/
+win32 {
+    debug: LIBS += -lWebServiced
+    else: LIBS += -lWebService
+} else {
+    LIBS += -lWebService
+}
 
 SOURCES += main.cpp \
     stocklisting.cpp \
