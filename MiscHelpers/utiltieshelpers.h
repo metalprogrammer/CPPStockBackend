@@ -58,6 +58,7 @@ public:
         {
             hasReadFirstLine = false;
             readNextLine(header);
+            std::cout<<"open"<<std::endl;
             return true;
         }
         else

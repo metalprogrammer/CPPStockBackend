@@ -14,7 +14,7 @@ void jsonWrite(int val, std::string& jsonString, JsonWriter* parent );
 
 void jsonWrite(float val, std::string& jsonString, JsonWriter* parent );
 
-void jsonWrite(bool val, std::string& jsonString, JsonWriter* parent );
+//void jsonWrite(bool val, std::string& jsonString, JsonWriter* parent );
 
 
 class JsonWriter
@@ -38,14 +38,11 @@ public:
     template<typename T,typename STRING_TYPE>
     void add(STRING_TYPE name, T t)
     {
-        if(jsonString != "")
-        {
-            jsonString += ",";
-        }
+        writeCommaAsNeeded();
 
         writeNameLabel(std::string(name));
 
-        addHelper(t);
+        addHelper<T>(t);
 
     }
 
@@ -66,12 +63,29 @@ public:
     }
 
     template<typename T,typename STRING_TYPE>
+    void addArrayPointer(STRING_TYPE name, std::vector<T*> list)
+    {
+        writeCommaAsNeeded();
+
+        writeNameLabel(name);
+        jsonString += "[";
+        for(int i = 0; i < list.size(); i++)
+        {
+            addHelper(*list[i]);
+            if(i + 1 != list.size())
+            {
+                jsonString += ",";
+            }
+        }
+
+        jsonString += "]";
+        //addArrayHelper(std::string(name), list, list.size());
+    }
+
+    template<typename T,typename STRING_TYPE>
     void writeJSONWebFormatArray(STRING_TYPE name, std::vector<T>& list, STRING_TYPE dataListName)
     {
-        if(jsonString != "")
-        {
-            jsonString += ",";
-        }
+        writeCommaAsNeeded();
 
         writeNameLabel(std::string(name));
 
@@ -98,34 +112,60 @@ public:
     {
         objOpen();
         add(std::string("id"), id);
-        writeJSONWebFormatArray(name,list,dataListName);
+        writeJSONWebFormatArray(std::string(name),list,std::string(dataListName));
     }
 
 
-
-
-    void writeNameLabel(std::string& name )
+    void writeIDArray(std::string name, int count)
     {
-        jsonString += "\"" + name + "\":";
+        writeCommaAsNeeded();
+
+        writeNameLabel(std::string(name));
+
+        jsonString += "[";
+
+        for(int i = 0; i < count; i++)
+        {
+            jsonString += std::to_string(i);
+
+            if(i + 1 != count)
+            {
+                jsonString += ",";
+            }
+        }
+
+        jsonString += "]";
+    }
+
+
+    template<typename STRING_TYPE>
+    void writeNameLabel(STRING_TYPE& name )
+    {
+        jsonString += "\"" + std::string(name) + "\":";
     }
 
 
 private:
     std::string jsonString;
 
-    template<typename T>
-    void addHelper(T t)
-    {
-       jsonWrite(t, jsonString, this);
-    }
-
-    template<typename T>
-    void addArrayHelper(std::string name, T list, int size)
+    void writeCommaAsNeeded()
     {
         if(jsonString != "")
         {
             jsonString += ",";
         }
+    }
+
+    template<typename T>
+    void addHelper(T t)
+    {
+       jsonWrite(static_cast<T>(t), jsonString, this);
+    }
+
+    template<typename T>
+    void addArrayHelper(std::string name, T list, int size)
+    {
+       writeCommaAsNeeded();
 
         jsonString += "[";
 

@@ -25,11 +25,8 @@ private:
 
 
 
-namespace CoolJson
-{
-    void jsonWrite(StockListing& s, std::string& jsonString, JsonWriter* parent);
-    //void jsonWrite(StockListing* s, std::string& jsonString, JsonWriter* parent);
-}
+void jsonWrite(StockListing s, std::string& jsonString, JsonWriter* parent);
+//void jsonWrite(StockListing& s, std::string* jsonString, JsonWriter* parent);
 
 
 void readFile(std::string file, std::vector<StockListing*>& list);

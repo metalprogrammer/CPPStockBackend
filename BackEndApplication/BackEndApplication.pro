@@ -3,7 +3,6 @@ QT += network
 QT -= gui
 
 CONFIG += c++11
-
 TARGET = BackEndApplication
 CONFIG += console
 CONFIG -= app_bundle
@@ -14,7 +13,8 @@ INCLUDEPATH += ../
 INCLUDEPATH += ../qhttpserver/src/
 
 LIBS += -L../QtYahooFinanceLib/lib/ -lQtYahooFinance
-LIBS += -L../QtWebServiceApi/lib/   -lWebService
+LIBS += -L../QtWebServiceApi/lib/ -lWebServiced
+
 
 SOURCES += main.cpp \
     stocklisting.cpp \

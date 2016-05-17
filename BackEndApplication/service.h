@@ -3,10 +3,16 @@
 
 #include <functional>
 #include <vector>
+#include <iostream>
 
 #include "stockdatamanager.h"
 #include "QtWebServiceApi/WebService/webservice.h"
 
+template<typename T>
+void print(T t)
+{
+    std::cout<<t<<std::endl;
+}
 
 int Launch(int argc, char *argv[])
 {
@@ -14,15 +20,20 @@ int Launch(int argc, char *argv[])
 
     StockDataManager sdm;
 
-    auto response = [](std::vector<std::string> list)
+    print("a");
+
+    auto response = [&sdm](std::vector<std::string> list)
     {
-        std::string output = "Args: ";
+        /*
+         * std::string output = "Args: ";
             foreach( std::string str, list)
             {
                 output += str + ", ";
             }
 
             return output;
+            */
+        return sdm.StockListJsonGet();
     };
 
 

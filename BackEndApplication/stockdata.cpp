@@ -4,8 +4,6 @@
 
 int idCount = 0;
 
-namespace CoolJson
-{
 
 void jsonWrite(HistoricalStockData& hsd, std::string& jsonString, JsonWriter* parent)
 {
@@ -16,4 +14,10 @@ void jsonWrite(HistoricalStockData& hsd, std::string& jsonString, JsonWriter* pa
     parent->add("average", hsd.Average());
     parent->objClose();
 }
+
+
+void jsonWrite(HistoricalStockData* hsd, std::string& jsonString, JsonWriter* parent)
+{
+    jsonWrite(*hsd,jsonString,parent);
 }
+

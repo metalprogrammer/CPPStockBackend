@@ -12,6 +12,7 @@ TEMPLATE = lib
 
 DEFINES += WEBSERVICE_LIBRARY
 
+CONFIG += c++11
 
 unix {
     target.path = /usr/lib
@@ -26,7 +27,14 @@ SOURCES += \
 
 INCLUDEPATH += ../../qhttpserver/src/
 
-LIBS += -L../../qhttpserver/lib -lqhttpserver
+LIBS += -L../../qhttpserver/lib
+#LIBS += -LC:\BackendLibs\lib
+win32 {
+    debug: LIBS += -lqhttpserverd
+    else: LIBS += -lqhttpserver
+} else {
+    LIBS += -lqhttpserver
+}
 
 !win32:VERSION = 0.1.0
 

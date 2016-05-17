@@ -15,7 +15,7 @@ StockListing::StockListing(std::string name_, std::string sym_):
 void readFile(std::string file, std::vector<StockListing*>& list)
 {
     CsvReader reader(file);
-
+    std::cout<<file<<std::endl;
     std::vector<std::string> parts;
     while(reader.readNextLine(parts))
     {
@@ -24,19 +24,19 @@ void readFile(std::string file, std::vector<StockListing*>& list)
 
         StockListing* temp = new StockListing(name, symbol);
         list.push_back(temp);
+        std::cout<<"id:"<<temp->myId<<std::endl;
     }
 
 }
-namespace CoolJson
+
+void jsonWrite(StockListing s, std::string& jsonString, JsonWriter* parent)
 {
-void jsonWrite(StockListing& s, std::string& jsonString, JsonWriter* parent)
-{
+    std::cout<<"sssssss"<<s.myId<<std::endl;
     parent->objOpen();
     parent->add("id", s.myId);
     parent->add(std::string("name"), s.name);
     parent->add("symbol", s.sym);
     parent->objClose();
-}
 }
 
 
