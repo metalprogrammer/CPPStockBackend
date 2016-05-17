@@ -3,7 +3,6 @@
 
 #include <QCoreApplication>
 
-#include "QtYahooFinance/historicaldata.h"
 #include "QtYahhoFinance/yahoofinance.h"
 #include <iostream>
 #include "time.h"

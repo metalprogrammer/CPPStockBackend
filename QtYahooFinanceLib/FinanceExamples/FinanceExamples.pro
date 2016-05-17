@@ -15,7 +15,4 @@ INCLUDEPATH += ../ \
 SOURCES += main.cpp
 
 
-
-win32:CONFIG(release, debug|release): LIBS += -L../../../backend/QtYahooFinanceLib/QtYahooFinance/release -lQtYahooFinance
-else:win32:CONFIG(debug, debug|release): LIBS += -L../../../backend/QtYahooFinanceLib/QtYahooFinance/debug/ -lQtYahooFinance
-else:unix: LIBS += -L$$OUT_PWD/../QtYahooFinance/ -lQtYahooFinance
+LIBS += -L../lib/ -lQtYahooFinance

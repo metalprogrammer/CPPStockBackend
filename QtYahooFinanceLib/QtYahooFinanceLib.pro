@@ -1,6 +1,9 @@
+CONFIG += ordered
+
 TEMPLATE = subdirs
 
 SUBDIRS += \
     FinanceExamples \
-    QtYahooFinance \
-    test
+    QtYahooFinance
+
+FinanceExamples.depends = QtYahooFinance

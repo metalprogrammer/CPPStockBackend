@@ -11,10 +11,10 @@ MAKEFILE      = Makefile.Release
 
 CC            = cl
 CXX           = cl
-DEFINES       = -DUNICODE -DWIN32 -DWIN64 -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG
+DEFINES       = -DUNICODE -DWIN32 -DWIN64 -DQT_YAHOO_FINANC_LIBRARY -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG
 CFLAGS        = -nologo -Zc:wchar_t -FS -Zc:strictStrings -O2 -MD -W3 -w44456 -w44457 -w44458 $(DEFINES)
 CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zc:strictStrings -Zc:throwingNew -O2 -MD -GR -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -EHsc $(DEFINES)
-INCPATH       = -I. -I..\.. -IC:\Qt\5.6\msvc2015_64\include -IC:\Qt\5.6\msvc2015_64\include\QtGui -IC:\Qt\5.6\msvc2015_64\include\QtANGLE -IC:\Qt\5.6\msvc2015_64\include\QtNetwork -IC:\Qt\5.6\msvc2015_64\include\QtCore -Irelease -IC:\Qt\5.6\msvc2015_64\mkspecs\win32-msvc2015 
+INCPATH       = -I. -I..\.. -IC:\Qt\5.6\msvc2015_64\include -IC:\Qt\5.6\msvc2015_64\include\QtGui -IC:\Qt\5.6\msvc2015_64\include\QtANGLE -IC:\Qt\5.6\msvc2015_64\include\QtNetwork -IC:\Qt\5.6\msvc2015_64\include\QtCore -I..\build -IC:\Qt\5.6\msvc2015_64\mkspecs\win32-msvc2015 
 LINKER        = link
 LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /INCREMENTAL:NO /DLL /SUBSYSTEM:WINDOWS
 LIBS          = /LIBPATH:C:\Qt\5.6\msvc2015_64\lib C:\Qt\5.6\msvc2015_64\lib\Qt5Gui.lib C:\Qt\5.6\msvc2015_64\lib\Qt5Network.lib C:\Qt\5.6\msvc2015_64\lib\Qt5Core.lib 
@@ -39,42 +39,42 @@ INSTALL_DIR     = xcopy /s /q /y /i
 
 ####### Output directory
 
-OBJECTS_DIR   = release
+OBJECTS_DIR   = ..\build
 
 ####### Files
 
 SOURCES       = yahoofinance.cpp 
-OBJECTS       = release\yahoofinance.obj
+OBJECTS       = ..\build\yahoofinance.obj
 
 DIST          =  historicaldata.h \
 		yahoofinance.h \
 		utiltieshelpers.h yahoofinance.cpp
 QMAKE_TARGET  = QtYahooFinance
-DESTDIR        = release\ #avoid trailing-slash linebreak
+DESTDIR        = ..\lib\ #avoid trailing-slash linebreak
 TARGET         = QtYahooFinance.dll
-DESTDIR_TARGET = release\QtYahooFinance.dll
+DESTDIR_TARGET = ..\lib\QtYahooFinance.dll
 
 ####### Implicit rules
 
 .SUFFIXES: .c .cpp .cc .cxx
 
-{.}.cpp{release\}.obj::
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Forelease\ @<<
+{.}.cpp{..\build\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fo..\build\ @<<
 	$<
 <<
 
-{.}.cc{release\}.obj::
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Forelease\ @<<
+{.}.cc{..\build\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fo..\build\ @<<
 	$<
 <<
 
-{.}.cxx{release\}.obj::
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Forelease\ @<<
+{.}.cxx{..\build\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fo..\build\ @<<
 	$<
 <<
 
-{.}.c{release\}.obj::
-	$(CC) -c $(CFLAGS) $(INCPATH) -Forelease\ @<<
+{.}.c{..\build\}.obj::
+	$(CC) -c $(CFLAGS) $(INCPATH) -Fo..\build\ @<<
 	$<
 <<
 
@@ -89,19 +89,19 @@ $(OBJECTS) $(LIBS)
 <<
 
 qmake: FORCE
-	@$(QMAKE) -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile.Release QtYahooFinance.pro
+	@$(QMAKE) -spec win32-msvc2015 -o Makefile.Release QtYahooFinance.pro
 
 qmake_all: FORCE
 
 dist:
-	$(ZIP) QtYahooFinance.zip $(SOURCES) $(DIST) QtYahooFinance.pro C:\Qt\5.6\msvc2015_64\mkspecs\features\spec_pre.prf C:\Qt\5.6\msvc2015_64\mkspecs\common\angle.conf C:\Qt\5.6\msvc2015_64\mkspecs\common\msvc-base.conf C:\Qt\5.6\msvc2015_64\mkspecs\common\msvc-desktop.conf C:\Qt\5.6\msvc2015_64\mkspecs\qconfig.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dlogic.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dlogic_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dquickinput.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dquickrender.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3drender.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3drender_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_clucene_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_core.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_dbus.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_help.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_labscontrols_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_labstemplates_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_location.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_network.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_platformsupport_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_script.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_script_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_serialbus.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_serialbus_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webengine.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webengine_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webenginecore.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webenginecore_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webenginewidgets.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webenginewidgets_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webview.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webview_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_zlib_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\features\qt_functions.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\qt_config.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\win32\qt_config.prf C:\Qt\5.6\msvc2015_64\mkspecs\win32-msvc2015\qmake.conf C:\Qt\5.6\msvc2015_64\mkspecs\features\spec_post.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\exclusive_builds.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\default_pre.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\win32\default_pre.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\resolve_config.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\default_post.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\build_pass.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\qml_debug.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\win32\rtti.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\precompile_header.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\warn_on.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\qt.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\resources.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\moc.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\win32\opengl.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\win32\windows.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\testcase_targets.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\exceptions.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\yacc.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\lex.prf QtYahooFinance.pro C:\Qt\5.6\msvc2015_64\lib\Qt5Gui.prl C:\Qt\5.6\msvc2015_64\lib\Qt5Network.prl C:\Qt\5.6\msvc2015_64\lib\Qt5Core.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES YACCSOURCES YACCSOURCES LEXSOURCES 
+	$(ZIP) QtYahooFinance.zip $(SOURCES) $(DIST) ..\..\CPPStockBackend.pro C:\Qt\5.6\msvc2015_64\mkspecs\features\spec_pre.prf C:\Qt\5.6\msvc2015_64\mkspecs\common\angle.conf C:\Qt\5.6\msvc2015_64\mkspecs\common\msvc-base.conf C:\Qt\5.6\msvc2015_64\mkspecs\common\msvc-desktop.conf C:\Qt\5.6\msvc2015_64\mkspecs\qconfig.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dcore.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dcore_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dinput.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dinput_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dlogic.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dlogic_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dquick.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dquick_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dquickinput.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dquickinput_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dquickrender.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3dquickrender_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3drender.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_3drender_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_axbase.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_axbase_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_axcontainer.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_axcontainer_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_axserver.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_axserver_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_bluetooth.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_bluetooth_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_bootstrap_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_clucene_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_concurrent.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_concurrent_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_core.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_core_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_dbus.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_dbus_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_designer.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_designer_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_designercomponents_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_gui.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_gui_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_help.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_help_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_labscontrols_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_labstemplates_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_location.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_location_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_multimedia.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_multimedia_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_multimediawidgets.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_network.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_network_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_nfc.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_nfc_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_opengl.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_opengl_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_openglextensions.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_openglextensions_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_platformsupport_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_positioning.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_positioning_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_printsupport.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_printsupport_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_qml.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_qml_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_qmldevtools_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_qmltest.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_qmltest_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_quick.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_quick_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_quickparticles_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_quickwidgets.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_quickwidgets_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_script.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_script_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_scripttools.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_scripttools_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_sensors.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_sensors_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_serialbus.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_serialbus_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_serialport.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_serialport_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_sql.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_sql_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_svg.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_svg_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_testlib.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_testlib_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_uiplugin.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_uitools.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_uitools_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webchannel.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webchannel_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webengine.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webengine_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webenginecore.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webenginecore_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webenginecoreheaders_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webenginewidgets.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webenginewidgets_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_websockets.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_websockets_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webview.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_webview_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_widgets.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_widgets_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_winextras.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_winextras_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_xml.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_xml_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_xmlpatterns.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\modules\qt_lib_zlib_private.pri C:\Qt\5.6\msvc2015_64\mkspecs\features\qt_functions.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\qt_config.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\win32\qt_config.prf C:\Qt\5.6\msvc2015_64\mkspecs\win32-msvc2015\qmake.conf C:\Qt\5.6\msvc2015_64\mkspecs\features\spec_post.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\exclusive_builds.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\default_pre.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\win32\default_pre.prf ..\QtYahooFinanceLib.pri C:\Qt\5.6\msvc2015_64\mkspecs\features\resolve_config.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\exclusive_builds_post.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\default_post.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\build_pass.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\win32\rtti.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\precompile_header.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\warn_on.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\qt.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\resources.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\moc.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\win32\opengl.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\win32\windows.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\testcase_targets.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\exceptions.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\yacc.prf C:\Qt\5.6\msvc2015_64\mkspecs\features\lex.prf QtYahooFinance.pro C:\Qt\5.6\msvc2015_64\lib\Qt5Gui.prl C:\Qt\5.6\msvc2015_64\lib\Qt5Network.prl C:\Qt\5.6\msvc2015_64\lib\Qt5Core.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES YACCSOURCES YACCSOURCES LEXSOURCES 
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\yahoofinance.obj
-	-$(DEL_FILE) release\QtYahooFinance.exp
+	-$(DEL_FILE) ..\build\yahoofinance.obj
+	-$(DEL_FILE) ..\lib\QtYahooFinance.exp
 
 distclean: clean 
-	-$(DEL_FILE) release\QtYahooFinance.lib
+	-$(DEL_FILE) ..\lib\QtYahooFinance.lib
 	-$(DEL_FILE) $(DESTDIR_TARGET)
 	-$(DEL_FILE) Makefile.Release
 
@@ -131,9 +131,7 @@ compiler_clean:
 
 ####### Compile
 
-release\yahoofinance.obj: yahoofinance.cpp yahoofinance.h \
-		historicaldata.h \
-		..\..\QTHttpGet\qthttpgetheaderonly.h \
+..\build\yahoofinance.obj: yahoofinance.cpp yahoofinance.h \
 		C:\Qt\5.6\msvc2015_64\include\QtCore\QCoreApplication \
 		C:\Qt\5.6\msvc2015_64\include\QtCore\qcoreapplication.h \
 		C:\Qt\5.6\msvc2015_64\include\QtCore\qglobal.h \
@@ -191,6 +189,8 @@ release\yahoofinance.obj: yahoofinance.cpp yahoofinance.h \
 		C:\Qt\5.6\msvc2015_64\include\QtCore\qcontainerfwd.h \
 		C:\Qt\5.6\msvc2015_64\include\QtCore\qobject_impl.h \
 		C:\Qt\5.6\msvc2015_64\include\QtCore\qeventloop.h \
+		historicaldata.h \
+		..\..\QTHttpGet\qthttpgetheaderonly.h \
 		C:\Qt\5.6\msvc2015_64\include\QtCore\QDebug \
 		C:\Qt\5.6\msvc2015_64\include\QtCore\qdebug.h \
 		C:\Qt\5.6\msvc2015_64\include\QtCore\qhash.h \
@@ -240,9 +240,20 @@ release\yahoofinance.obj: yahoofinance.cpp yahoofinance.h \
 
 ####### Install
 
-install:  FORCE
+install_target: first FORCE
+	@if not exist $(INSTALL_ROOT)\usr\local\lib mkdir $(INSTALL_ROOT)\usr\local\lib & if not exist $(INSTALL_ROOT)\usr\local\lib exit 1
+	-$(INSTALL_FILE) ..\lib\QtYahooFinance.lib $(INSTALL_ROOT)\usr\local\lib\QtYahooFinance.lib
+	-$(INSTALL_FILE) $(DESTDIR_TARGET) $(INSTALL_ROOT)\usr\local\lib\$(TARGET)
 
-uninstall:  FORCE
+uninstall_target: FORCE
+	-$(DEL_FILE) $(INSTALL_ROOT)\usr\local\lib\QtYahooFinance.lib 
+	 -$(DEL_FILE) $(INSTALL_ROOT)\usr\local\lib\$(TARGET)
+	-$(DEL_DIR) $(INSTALL_ROOT)\usr\local\lib 
+
+
+install: install_target  FORCE
+
+uninstall: uninstall_target  FORCE
 
 FORCE:
 

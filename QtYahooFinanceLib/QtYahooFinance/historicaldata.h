@@ -1,8 +1,9 @@
 #ifndef HISTORICALDATA_H
 #define HISTORICALDATA_H
 #include <string>
+#include "yahoofinance.h"
 
-struct HistoricalStockData
+struct QT_FINANC_COMMON_DLLSPEC HistoricalStockData
 {
     std::string date;
     double open;

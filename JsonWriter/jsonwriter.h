@@ -8,41 +8,15 @@ namespace CoolJson
 {
 class JsonWriter;
 
-void jsonWrite(std::string& str, std::string& jsonString, JsonWriter* parent)
-{
-    //A nice feature to add would to escape any quotes within str
+void jsonWrite(std::string& str, std::string& jsonString, JsonWriter* parent);
 
-    jsonString += "\"" + str + "\"";
-}
+void jsonWrite(double val, std::string& jsonString, JsonWriter* parent );
 
-void jsonWrite(double val, std::string& jsonString, JsonWriter* parent )
-{
-    jsonString += std::to_string(val);
-}
+void jsonWrite(int val, std::string& jsonString, JsonWriter* parent );
 
-void jsonWrite(int val, std::string& jsonString, JsonWriter* parent )
-{
-    jsonString += std::to_string(val);
-}
+void jsonWrite(float val, std::string& jsonString, JsonWriter* parent );
 
-void jsonWrite(float val, std::string& jsonString, JsonWriter* parent )
-{
-    jsonString += std::to_string(val);
-}
-
-void jsonWrite(bool val, std::string& jsonString, JsonWriter* parent )
-{
-    std::string tof = "";
-    if(val)
-    {
-        tof = "true";
-    }
-    else
-    {
-        tof = "false";
-    }
-    jsonString += tof;
-}
+void jsonWrite(bool val, std::string& jsonString, JsonWriter* parent );
 
 
 class JsonWriter
@@ -55,7 +29,7 @@ public:
 
     std::string jsonStringGet()
     {
-        return jsonString;
+        return "{" + jsonString + "}";
     }
 
     void clear()
@@ -63,24 +37,78 @@ public:
         jsonString = "";
     }
 
-    template<typename T>
-    void add(std::string name, T t)
+    template<typename T,typename STRING_TYPE>
+    void add(STRING_TYPE name, T t)
     {
         if(jsonString != "")
         {
             jsonString += ",";
         }
 
-        writeNameLabel(name);
+        writeNameLabel(std::string(name));
 
         addHelper(t);
 
     }
 
-    template<typename T>
-    void addArray(std::string name, std::vector<T> list)
+    void objOpen()
     {
-        addArrayHelper(name, list, list.size());
+        jsonString += "{";
+    }
+
+    void objClose()
+    {
+        jsonString += "}";
+    }
+
+    template<typename T,typename STRING_TYPE>
+    void addArray(STRING_TYPE name, std::vector<T> list)
+    {
+        addArrayHelper(std::string(name), list, list.size());
+    }
+
+    template<typename T,typename STRING_TYPE>
+    void writeJSONWebFormatArray(STRING_TYPE name, std::vector<T>& list, STRING_TYPE dataListName)
+    {
+        if(jsonString != "")
+        {
+            jsonString += ",";
+        }
+
+        writeNameLabel(std::string(name));
+
+        jsonString += "[";
+
+        for(int i = 0; i < list.size(); i++)
+        {
+            jsonString += std::to_string(i + 1);
+
+            if( i + 1 != list.size())
+            {
+                jsonString += ",";
+            }
+        }
+
+        jsonString += "]";
+
+        objClose();
+        addArray(std::string(dataListName), list);
+    }
+
+    template<typename T,typename STRING_TYPE>
+    void writeJSONWebFormatArray(STRING_TYPE id, STRING_TYPE name, std::vector<T>& list, STRING_TYPE dataListName)
+    {
+        objOpen();
+        add(std::string("id"), id);
+        writeJSONWebFormatArray(name,list,dataListName);
+    }
+
+
+
+
+    void writeNameLabel(std::string& name )
+    {
+        jsonString += "\"" + name + "\":";
     }
 
 
@@ -116,11 +144,6 @@ private:
         }
 
         jsonString += "]";
-    }
-
-    void writeNameLabel(std::string& name )
-    {
-        jsonString += "\"" + name + "\":";
     }
 
 };

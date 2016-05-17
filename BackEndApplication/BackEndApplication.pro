@@ -1,4 +1,5 @@
 QT += core
+QT += network
 QT -= gui
 
 CONFIG += c++11
@@ -9,14 +10,20 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-INCLUDEPATH += "C:\Users\Chris Glynn Pelech\Documents\QTProjects\QTWebLibary\trunk\src"
-LIBS += -LC:\BackendLibs\lib
+INCLUDEPATH += ../
+INCLUDEPATH += ../qhttpserver/src/
 
-win32 {
-    debug: LIBS += -lqhttpserverd
-    else: LIBS += -lqhttpserver
-} else {
-    LIBS += -lqhttpserver
-}
+LIBS += -L../QtYahooFinanceLib/lib/ -lQtYahooFinance
+LIBS += -L../QtWebServiceApi/lib/   -lWebService
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    stocklisting.cpp \
+    stockdatamanager.cpp \
+    stockdata.cpp \
+    ../JsonWriter/jsonwriter.cpp
+
+HEADERS += \
+    stocklisting.h \
+    stockdata.h \
+    stockdatamanager.h \
+    service.h

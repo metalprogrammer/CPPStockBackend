@@ -9,6 +9,10 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
+SOURCES += ../jsonwriter.cpp
 SOURCES += main.cpp
 
-HEADERS += ../
+INCLUDEPATH += ../
+
+HEADERS += \
+    cat.h

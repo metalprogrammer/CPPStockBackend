@@ -1,19 +1,9 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2016-05-11T13:40:32
-#
-#-------------------------------------------------
+include(../QtYahooFinanceLib.pri)
 
+QFINANCE = ..
 QT += network
-
-greaterThan(QT_MAJOR_VERSION, 4)
-
-TARGET = QtYahooFinance
 TEMPLATE = lib
 
-
-SOURCES += \
-    yahoofinance.cpp \
 
 DEFINES += QT_YAHOO_FINANC_LIBRARY
 
@@ -23,11 +13,27 @@ HEADERS  += \
     historicaldata.h \
     yahoofinance.h \
     utiltieshelpers.h
+SOURCES += \
+    yahoofinance.cpp \
 
-CONFIG += lib
+TARGET = QtYahooFinance
 
-unix {
-    target.path = /usr/lib
-    INSTALLS += target
+!win32:VERSION = 0.1.0
+
+CONFIG += dll debug_and_release
+
+CONFIG(debug, debug|release) {
+    win32: TARGET = $$join(TARGET,,,d)
 }
+
+
+OBJECTS_DIR = $$QFINANCE/build
+MOC_DIR = $$QFINANCE/build
+DESTDIR = $$QFINANCE/lib
+
+target.path = $$LIBDIR
+headers.path = $$INCLUDEDIR
+headers.files = $$PUBLIC_HEADERS
+INSTALLS += target headers
+
 

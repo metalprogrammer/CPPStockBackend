@@ -4,5 +4,9 @@ SUBDIRS += \
     JsonWriter \
     QTHttpGet \
     QtYahooFinanceLib \
-    MiscHelpers
+    MiscHelpers \
+    qhttpserver \
+    QtWebServiceApi \
+    QtWebServiceApi
+
 

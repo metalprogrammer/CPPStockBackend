@@ -1,12 +1,19 @@
 #ifndef YAHOOFINANCE_H
 #define YAHOOFINANCE_H
+#include <QCoreApplication>
+
+#if defined QT_YAHOO_FINANC_LIBRARY
+ #define QT_FINANC_COMMON_DLLSPEC Q_DECL_EXPORT
+#else
+ #define QT_FINANC_COMMON_DLLSPEC Q_DECL_IMPORT
+#endif
 
 #include <vector>
 #include <string>
 #include "historicaldata.h"
 #include <time.h>
 
-enum EXCHANGE {AMERICAN_STOCK_EXCHANGE	,
+enum QT_FINANC_COMMON_DLLSPEC EXCHANGE {AMERICAN_STOCK_EXCHANGE	,
                       BATS_EXCHANGE	,
                       CHICAGO_BOARD_OF_TRADE	,
                       CHICAGO_MERCANTILE_EXCHANGE	,
@@ -69,7 +76,7 @@ enum EXCHANGE {AMERICAN_STOCK_EXCHANGE	,
                       LONDON_STOCK_EXCHANGE
 };
 
-const std::string suffixLookUp[] = {"",
+const std::string  suffixLookUp[] = {"",
                                     "",
                                     ".CBT",
                                     ".CME",
@@ -132,13 +139,13 @@ const std::string suffixLookUp[] = {"",
                                     ".L"
 };
 
-class YahooFinance
+class QT_FINANC_COMMON_DLLSPEC YahooFinance
 {
 public:
     YahooFinance(){}
 
     void historicalDataGet(std::string symbol, tm* start, tm* end, EXCHANGE exchange, std::vector<HistoricalStockData*> &result);
-    std::vector<HistoricalStockData*> historicalDataGet(std::string symbol, tm* start, tm* end, EXCHANGE exchange);
+    std::vector<HistoricalStockData*> historicalDataGet(std::string symbol, tm* start, tm* end, EXCHANGE exchange = AMERICAN_STOCK_EXCHANGE);
 };
 
 #endif // YAHOOFINANCE_H
