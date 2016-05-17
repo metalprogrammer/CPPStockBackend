@@ -7,6 +7,7 @@
 #include <vector>
 #include <functional>
 #include <string>
+#include <vector>
 
 #if defined WEBSERVICE_LIBRARY
  #define QT_WEB_SERVICE_API Q_DECL_EXPORT
@@ -21,9 +22,11 @@ class QT_WEB_SERVICE_API WebService: public QObject
 
 public:
     WebService(ServerFunction sf);
+    void EnableCors(std::string site);
 
 private:
     ServerFunction serverFunction;
+    std::vector<std::string> crossSites;
 
 private slots:
     void handleRequest(QHttpRequest *req, QHttpResponse *resp);

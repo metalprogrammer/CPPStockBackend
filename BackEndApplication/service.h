@@ -38,7 +38,7 @@ int Launch(int argc, char *argv[])
 
 
     WebService ws(response);
-
+    ws.EnableCors("http://localhost:4200");
 
     return a.exec();
 }

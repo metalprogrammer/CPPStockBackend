@@ -15,9 +15,11 @@ std::string StockDataManager::StockListJsonGet()
 
     jw.writeNameLabel("stocklisting");
     jw.objOpen();
-
+    jw.OverideNextCommaRule();
+    jw.add("id", std::string("stockList"));
     jw.writeIDArray("listofstocks", stockList.size());
     jw.objClose();
+
     jw.addArrayPointer("stocks",stockList);
     std::cout<<"done"<<std::endl;
     return jw.jsonStringGet();

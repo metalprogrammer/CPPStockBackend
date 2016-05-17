@@ -36,7 +36,7 @@ void readFile(std::string file, std::vector<StockListing*>& list)
 
 void jsonWrite(StockListing s, std::string& jsonString, JsonWriter* parent)
 {
-    std::cout<<"sssssss"<<s.myId<<std::endl;
+    parent->OverideNextCommaRule();
     parent->objOpen();
     parent->add("id", s.myId);
     parent->add(std::string("name"), s.name);

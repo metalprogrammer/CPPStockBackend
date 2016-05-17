@@ -126,7 +126,7 @@ public:
 
         for(int i = 0; i < count; i++)
         {
-            jsonString += std::to_string(i);
+            jsonString += std::to_string(i + 1);
 
             if(i + 1 != count)
             {
@@ -144,16 +144,21 @@ public:
         jsonString += "\"" + std::string(name) + "\":";
     }
 
+    void OverideNextCommaRule()
+    {
+        overrideNextCommaRule = true;
+    }
 
 private:
     std::string jsonString;
 
     void writeCommaAsNeeded()
     {
-        if(jsonString != "")
+        if(jsonString != "" && !overrideNextCommaRule)
         {
             jsonString += ",";
         }
+        overrideNextCommaRule = false;
     }
 
     template<typename T>
@@ -183,6 +188,8 @@ private:
 
         jsonString += "]";
     }
+
+    bool overrideNextCommaRule{false};
 
 };
 
