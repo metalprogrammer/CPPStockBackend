@@ -149,8 +149,21 @@ public:
         overrideNextCommaRule = true;
     }
 
-private:
-    std::string jsonString;
+    void BracketOpen()
+    {
+        jsonString += "[";
+    }
+
+    void BracketClose()
+    {
+        jsonString += "]";
+    }
+
+    template<typename T>
+    void addHelper(T t)
+    {
+       jsonWrite(static_cast<T>(t), jsonString, this);
+    }
 
     void writeCommaAsNeeded()
     {
@@ -161,11 +174,10 @@ private:
         overrideNextCommaRule = false;
     }
 
-    template<typename T>
-    void addHelper(T t)
-    {
-       jsonWrite(static_cast<T>(t), jsonString, this);
-    }
+private:
+    std::string jsonString;
+
+
 
     template<typename T>
     void addArrayHelper(std::string name, T list, int size)
