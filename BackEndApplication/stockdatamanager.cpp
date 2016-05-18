@@ -9,18 +9,29 @@ StockDataManager::StockDataManager()
     readFile("companylist3.csv",stockList);
 }
 
-std::string StockDataManager::StockListJsonGet()
+std::vector<StockListing*> StockDataManager::search(std::string symbol )
+{
+
+}
+
+std::string StockDataManager::StockListJsonGet(std::string search)
 {
     JsonWriter jw;
 
     jw.writeNameLabel("stocklisting");
     jw.objOpen();
     jw.OverideNextCommaRule();
-    jw.add("id", std::string("stockList"));
-    jw.writeIDArray("listofstocks", stockList.size());
+    jw.add("id", search);
+
+    std::vector<StockListing*>* searchResult = search(symbol);
+
+
+
+
+    jw.writeIDArray("listofstocks", searchResult.size());
     jw.objClose();
 
-    jw.addArrayPointer("stocks",stockList);
+    jw.addArrayPointer("stocks",searchResult);
     std::cout<<"done"<<std::endl;
     return jw.jsonStringGet();
 }

@@ -32,7 +32,7 @@ int Launch(int argc, char *argv[])
 
         if(list[1] == "stocklistings")
         {
-            return sdm.StockListJsonGet();
+            return sdm.StockListJsonGet(list[2]);
         }
         if(list[1] == "historicaldata")
         {

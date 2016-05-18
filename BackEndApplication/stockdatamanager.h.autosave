@@ -9,6 +9,18 @@
 template <typename KEY, typename VALUE, int SIZE>
 class Cache
 {
+public:
+    void UpdateEntry(KEY key_, VALUE val_)
+    {
+        int pos = PosOfKeyGet(key_);
+        if(pos > -1)
+        {
+            enteries[i].val = val_;
+        }
+    }
+
+    VALUE EntryGet(KEY);
+private:
     struct CacheEntry
     {
         CacheEntry(VALUE _val):  val(_val){}
@@ -17,6 +29,24 @@ class Cache
         VALUE val;
         int CacheHit{1};
     };
+    
+    int PosOfKeyGet(KEY key_)
+    {
+        for(int i = 0; i < SIZE; i++)
+        {
+            if(enteries[i].key == key_)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    CacheEntry enteries[SIZE];
+    
+
+    
+    
 };
 
 class StockDataManager
