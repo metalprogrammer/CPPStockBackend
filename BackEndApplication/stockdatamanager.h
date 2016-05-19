@@ -95,7 +95,7 @@ public:
 
     std::string StockListJsonGet(std::string search);
     std::string StockDataJsonGet(std::string symbol);
-    std::vector<StockListing*>* SymbolSearch(std::string symbol);
+    std::vector<StockListing*>* SymbolSearch(std::string _searchSymbol);
 
 private:
     std::vector<StockListing*> stockList;

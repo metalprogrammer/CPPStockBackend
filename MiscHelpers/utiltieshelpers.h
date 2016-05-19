@@ -10,6 +10,29 @@
 
 #include "time.h"
 
+/*
+ * A file using commonly needed helper functions and classes
+ */
+
+/*
+ * Creates a copy of the string in all caps
+ */
+static std::string CapString(std::string org)
+{
+    std::string cpy = org;
+    for (auto & c: cpy)
+    {
+        c = toupper(c);
+    }
+
+    return cpy;
+}
+
+/*
+ * Split as string and  insert the data into the passed in vector reference
+ * Passing in a vector reference eases memory management over creating a new
+ * heap allocated vector and is faster then returnign a vector.
+ */
 static void split(const std::string &s, char delim, std::vector<std::string> &data)
 {
     std::stringstream stringStream(s);
@@ -19,6 +42,10 @@ static void split(const std::string &s, char delim, std::vector<std::string> &da
     }
 }
 
+
+/*
+ * Add days to C time structs
+ */
 static tm* addDays(time_t t,int days)
 {
     tm* tmStruct = localtime(&t);
@@ -30,6 +57,9 @@ static tm* addDays(time_t t,int days)
     return tmStruct;
 }
 
+/*
+ * Add days to C time structs
+ */
 static tm addDays(tm* t,int days)
 {
     tm temp = *t;
@@ -41,6 +71,9 @@ static tm addDays(tm* t,int days)
     return temp;
 }
 
+/*
+ * Helper class for reading a csv File
+ */
 class CsvReader
 {
 public:
@@ -89,7 +122,5 @@ private:
     bool hasReadFirstLine{false};
     std::string line;
 };
-
-
 
 #endif // UTILTIESHELPERS_H

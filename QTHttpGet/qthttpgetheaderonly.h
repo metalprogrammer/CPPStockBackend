@@ -10,6 +10,11 @@
 #include <QUrlQuery>
 #include <string>
 
+/*
+ * A simple Header only file containing a method to get the http response
+ * from a given url
+ * And return a string.
+ */
 std::string httpGet(std::string url)
 {
     // create custom temporary event loop on stack

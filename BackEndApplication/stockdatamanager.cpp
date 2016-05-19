@@ -1,6 +1,7 @@
 #include "stockdatamanager.h"
 #include "QtYahooFinanceLib/QtYahooFinance/yahoofinance.h"
 #include "JsonWriter/jsonwriter.h"
+#include "MiscHelpers/utiltieshelpers.h"
 
 StockDataManager::StockDataManager()
 {
@@ -9,30 +10,35 @@ StockDataManager::StockDataManager()
     readFile("companylist3.csv",stockList);
 }
 
-std::vector<StockListing *> *StockDataManager::SymbolSearch(std::string symbol )
+std::vector<StockListing *> *StockDataManager::SymbolSearch(std::string _searchSymbol )
 {
+    _searchSymbol = CapString(_searchSymbol);
+
     std::cout<<"searach"<<std::endl;
 
-    if(cache.KeyHas(symbol))
+    if(cache.KeyHas(_searchSymbol))
     {
         std::cout<<"cache hit"<<std::endl;
-        return cache.EntryGet(symbol);
+        return cache.EntryGet(_searchSymbol);
     }
     else
     {
-       std::vector<StockListing *>* temp = new std::vector<StockListing*>();
-        std::cout<<"cache miss"<<symbol<<std::endl;
+        std::vector<StockListing *>* temp = new std::vector<StockListing*>();
+        std::cout<<"cache miss"<<_searchSymbol<<std::endl;
 
-       for(int i = 0; i < stockList.size(); i++)
-       {
-           if(stockList[i]->name.find(symbol) != std::string::npos)
-           {
-               std::cout<<"match"<<std::endl;
-               temp->push_back(stockList[i]);
-           }
-       }
-       cache.UpdateEntry(symbol,temp);
-       return temp;
+        for(int i = 0; i < stockList.size(); i++)
+        {
+            if(CapString(stockList[i]->name).find(_searchSymbol) != std::string::npos || CapString(stockList[i]->sym).find(_searchSymbol) != std::string::npos)
+            {
+                temp->push_back(stockList[i]);
+            }
+            else
+            {
+                //std::cout<<"no match: "<<stockList[i]->name<<std::endl;
+            }
+        }
+        cache.UpdateEntry(_searchSymbol,temp);
+        return temp;
     }
 }
 
@@ -53,7 +59,6 @@ std::string StockDataManager::StockListJsonGet(std::string search)
     jw.BracketOpen();
     for(int i = 0; i < searchResult->size(); i++)
     {
-        std::cout<<"as"<<std::endl;
         jw.addHelper(searchResult->at(i)->myId);
         if(i + 1 != searchResult->size())
         {

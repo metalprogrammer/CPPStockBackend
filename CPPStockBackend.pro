@@ -6,7 +6,8 @@ SUBDIRS += \
     QtYahooFinanceLib \
     MiscHelpers \
     qhttpserver \
-    QtWebServiceApi \
     QtWebServiceApi
 
-
+QtYahooFinanceLib.depends = QTHttpGet
+QtWebServiceApi.depends = qhttpserver
+BackEndApplication.depends = QtYahooFinanceLib QtWebServiceApi

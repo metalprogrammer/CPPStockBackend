@@ -17,7 +17,7 @@ CXXFLAGS      = -nologo -Zc:wchar_t -FS -Zc:strictStrings -Zc:throwingNew -Zi -M
 INCPATH       = -I. -I.. -I..\.. -IC:\Qt\5.6\msvc2015_64\include -IC:\Qt\5.6\msvc2015_64\include\QtCore -Idebug -IC:\Qt\5.6\msvc2015_64\mkspecs\win32-msvc2015 
 LINKER        = link
 LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /DEBUG /SUBSYSTEM:CONSOLE "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
-LIBS          = /LIBPATH:..\lib QtYahooFinance.lib /LIBPATH:C:\Qt\5.6\msvc2015_64\lib C:\Qt\5.6\msvc2015_64\lib\Qt5Cored.lib 
+LIBS          = /LIBPATH:..\lib ..\lib\QtYahooFinanced.lib /LIBPATH:C:\Qt\5.6\msvc2015_64\lib C:\Qt\5.6\msvc2015_64\lib\Qt5Cored.lib 
 QMAKE         = C:\Qt\5.6\msvc2015_64\bin\qmake.exe
 IDC           = idc
 IDL           = midl
@@ -186,8 +186,6 @@ debug\main.obj: main.cpp C:\Qt\5.6\msvc2015_64\include\QtCore\QCoreApplication \
 		C:\Qt\5.6\msvc2015_64\include\QtCore\qcontainerfwd.h \
 		C:\Qt\5.6\msvc2015_64\include\QtCore\qobject_impl.h \
 		C:\Qt\5.6\msvc2015_64\include\QtCore\qeventloop.h \
-		..\..\QtYahhoFinance\yahoofinance.h \
-		..\..\QtYahhoFinance\historicaldata.h \
 		..\..\MiscHelpers\utiltieshelpers.h
 
 ####### Install

@@ -30,40 +30,40 @@ SUBTARGETS    =  \
 		sub-QtYahooFinanceLib \
 		sub-MiscHelpers \
 		sub-qhttpserver \
-		sub-QtWebServiceApi \
 		sub-QtWebServiceApi
 
 
-sub-BackEndApplication-qmake_all:  FORCE
+sub-BackEndApplication-qmake_all: sub-QtYahooFinanceLib-qmake_all sub-QtWebServiceApi-qmake_all FORCE
 	@if not exist BackEndApplication\ mkdir BackEndApplication\ & if not exist BackEndApplication\ exit 1
 	cd BackEndApplication\ && $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\BackEndApplication\BackEndApplication.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd BackEndApplication\ && $(MAKE) -f Makefile qmake_all
-sub-BackEndApplication: FORCE
+sub-BackEndApplication: sub-QtYahooFinanceLib \
+		sub-QtWebServiceApi FORCE
 	@if not exist BackEndApplication\ mkdir BackEndApplication\ & if not exist BackEndApplication\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd BackEndApplication\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\BackEndApplication\BackEndApplication.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile
-sub-BackEndApplication-make_first: FORCE
+sub-BackEndApplication-make_first: sub-QtYahooFinanceLib-make_first sub-QtWebServiceApi-make_first FORCE
 	@if not exist BackEndApplication\ mkdir BackEndApplication\ & if not exist BackEndApplication\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd BackEndApplication\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\BackEndApplication\BackEndApplication.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile 
-sub-BackEndApplication-all: FORCE
+sub-BackEndApplication-all: sub-QtYahooFinanceLib-all sub-QtWebServiceApi-all FORCE
 	@if not exist BackEndApplication\ mkdir BackEndApplication\ & if not exist BackEndApplication\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd BackEndApplication\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\BackEndApplication\BackEndApplication.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile all
-sub-BackEndApplication-clean: FORCE
+sub-BackEndApplication-clean: sub-QtYahooFinanceLib-clean sub-QtWebServiceApi-clean FORCE
 	@if not exist BackEndApplication\ mkdir BackEndApplication\ & if not exist BackEndApplication\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd BackEndApplication\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\BackEndApplication\BackEndApplication.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile clean
-sub-BackEndApplication-distclean: FORCE
+sub-BackEndApplication-distclean: sub-QtYahooFinanceLib-distclean sub-QtWebServiceApi-distclean FORCE
 	@if not exist BackEndApplication\ mkdir BackEndApplication\ & if not exist BackEndApplication\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd BackEndApplication\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\BackEndApplication\BackEndApplication.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile distclean
-sub-BackEndApplication-install_subtargets: FORCE
+sub-BackEndApplication-install_subtargets: sub-QtYahooFinanceLib-install_subtargets sub-QtWebServiceApi-install_subtargets FORCE
 	@if not exist BackEndApplication\ mkdir BackEndApplication\ & if not exist BackEndApplication\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd BackEndApplication\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\BackEndApplication\BackEndApplication.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile install
-sub-BackEndApplication-uninstall_subtargets: FORCE
+sub-BackEndApplication-uninstall_subtargets: sub-QtYahooFinanceLib-uninstall_subtargets sub-QtWebServiceApi-uninstall_subtargets FORCE
 	@if not exist BackEndApplication\ mkdir BackEndApplication\ & if not exist BackEndApplication\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd BackEndApplication\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\BackEndApplication\BackEndApplication.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile uninstall
@@ -133,36 +133,36 @@ sub-QTHttpGet-uninstall_subtargets: FORCE
 	@if not exist QTHttpGet\ mkdir QTHttpGet\ & if not exist QTHttpGet\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QTHttpGet\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QTHttpGet\QTHttpGet.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile uninstall
-sub-QtYahooFinanceLib-qmake_all:  FORCE
+sub-QtYahooFinanceLib-qmake_all: sub-QTHttpGet-qmake_all FORCE
 	@if not exist QtYahooFinanceLib\ mkdir QtYahooFinanceLib\ & if not exist QtYahooFinanceLib\ exit 1
 	cd QtYahooFinanceLib\ && $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtYahooFinanceLib\QtYahooFinanceLib.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtYahooFinanceLib\ && $(MAKE) -f Makefile qmake_all
-sub-QtYahooFinanceLib: FORCE
+sub-QtYahooFinanceLib: sub-QTHttpGet FORCE
 	@if not exist QtYahooFinanceLib\ mkdir QtYahooFinanceLib\ & if not exist QtYahooFinanceLib\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtYahooFinanceLib\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtYahooFinanceLib\QtYahooFinanceLib.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile
-sub-QtYahooFinanceLib-make_first: FORCE
+sub-QtYahooFinanceLib-make_first: sub-QTHttpGet-make_first FORCE
 	@if not exist QtYahooFinanceLib\ mkdir QtYahooFinanceLib\ & if not exist QtYahooFinanceLib\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtYahooFinanceLib\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtYahooFinanceLib\QtYahooFinanceLib.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile 
-sub-QtYahooFinanceLib-all: FORCE
+sub-QtYahooFinanceLib-all: sub-QTHttpGet-all FORCE
 	@if not exist QtYahooFinanceLib\ mkdir QtYahooFinanceLib\ & if not exist QtYahooFinanceLib\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtYahooFinanceLib\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtYahooFinanceLib\QtYahooFinanceLib.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile all
-sub-QtYahooFinanceLib-clean: FORCE
+sub-QtYahooFinanceLib-clean: sub-QTHttpGet-clean FORCE
 	@if not exist QtYahooFinanceLib\ mkdir QtYahooFinanceLib\ & if not exist QtYahooFinanceLib\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtYahooFinanceLib\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtYahooFinanceLib\QtYahooFinanceLib.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile clean
-sub-QtYahooFinanceLib-distclean: FORCE
+sub-QtYahooFinanceLib-distclean: sub-QTHttpGet-distclean FORCE
 	@if not exist QtYahooFinanceLib\ mkdir QtYahooFinanceLib\ & if not exist QtYahooFinanceLib\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtYahooFinanceLib\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtYahooFinanceLib\QtYahooFinanceLib.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile distclean
-sub-QtYahooFinanceLib-install_subtargets: FORCE
+sub-QtYahooFinanceLib-install_subtargets: sub-QTHttpGet-install_subtargets FORCE
 	@if not exist QtYahooFinanceLib\ mkdir QtYahooFinanceLib\ & if not exist QtYahooFinanceLib\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtYahooFinanceLib\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtYahooFinanceLib\QtYahooFinanceLib.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile install
-sub-QtYahooFinanceLib-uninstall_subtargets: FORCE
+sub-QtYahooFinanceLib-uninstall_subtargets: sub-QTHttpGet-uninstall_subtargets FORCE
 	@if not exist QtYahooFinanceLib\ mkdir QtYahooFinanceLib\ & if not exist QtYahooFinanceLib\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtYahooFinanceLib\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtYahooFinanceLib\QtYahooFinanceLib.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile uninstall
@@ -232,69 +232,36 @@ sub-qhttpserver-uninstall_subtargets: FORCE
 	@if not exist qhttpserver\ mkdir qhttpserver\ & if not exist qhttpserver\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd qhttpserver\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\qhttpserver\qhttpserver.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile uninstall
-sub-QtWebServiceApi-qmake_all:  FORCE
+sub-QtWebServiceApi-qmake_all: sub-qhttpserver-qmake_all FORCE
 	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
 	cd QtWebServiceApi\ && $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtWebServiceApi\ && $(MAKE) -f Makefile qmake_all
-sub-QtWebServiceApi: FORCE
+sub-QtWebServiceApi: sub-qhttpserver FORCE
 	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile
-sub-QtWebServiceApi-make_first: FORCE
+sub-QtWebServiceApi-make_first: sub-qhttpserver-make_first FORCE
 	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile 
-sub-QtWebServiceApi-all: FORCE
+sub-QtWebServiceApi-all: sub-qhttpserver-all FORCE
 	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile all
-sub-QtWebServiceApi-clean: FORCE
+sub-QtWebServiceApi-clean: sub-qhttpserver-clean FORCE
 	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile clean
-sub-QtWebServiceApi-distclean: FORCE
+sub-QtWebServiceApi-distclean: sub-qhttpserver-distclean FORCE
 	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile distclean
-sub-QtWebServiceApi-install_subtargets: FORCE
+sub-QtWebServiceApi-install_subtargets: sub-qhttpserver-install_subtargets FORCE
 	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile install
-sub-QtWebServiceApi-uninstall_subtargets: FORCE
-	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
-	@set MAKEFLAGS=$(MAKEFLAGS)
-	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile uninstall
-sub-QtWebServiceApi-qmake_all:  FORCE
-	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
-	cd QtWebServiceApi\ && $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile
-	@set MAKEFLAGS=$(MAKEFLAGS)
-	cd QtWebServiceApi\ && $(MAKE) -f Makefile qmake_all
-sub-QtWebServiceApi: FORCE
-	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
-	@set MAKEFLAGS=$(MAKEFLAGS)
-	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile
-sub-QtWebServiceApi-make_first: FORCE
-	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
-	@set MAKEFLAGS=$(MAKEFLAGS)
-	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile 
-sub-QtWebServiceApi-all: FORCE
-	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
-	@set MAKEFLAGS=$(MAKEFLAGS)
-	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile all
-sub-QtWebServiceApi-clean: FORCE
-	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
-	@set MAKEFLAGS=$(MAKEFLAGS)
-	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile clean
-sub-QtWebServiceApi-distclean: FORCE
-	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
-	@set MAKEFLAGS=$(MAKEFLAGS)
-	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile distclean
-sub-QtWebServiceApi-install_subtargets: FORCE
-	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
-	@set MAKEFLAGS=$(MAKEFLAGS)
-	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile install
-sub-QtWebServiceApi-uninstall_subtargets: FORCE
+sub-QtWebServiceApi-uninstall_subtargets: sub-qhttpserver-uninstall_subtargets FORCE
 	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile uninstall
@@ -575,17 +542,17 @@ CPPStockBackend.pro:
 qmake: FORCE
 	@$(QMAKE) -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile CPPStockBackend.pro
 
-qmake_all: sub-BackEndApplication-qmake_all sub-JsonWriter-qmake_all sub-QTHttpGet-qmake_all sub-QtYahooFinanceLib-qmake_all sub-MiscHelpers-qmake_all sub-qhttpserver-qmake_all sub-QtWebServiceApi-qmake_all sub-QtWebServiceApi-qmake_all FORCE
+qmake_all: sub-BackEndApplication-qmake_all sub-JsonWriter-qmake_all sub-QTHttpGet-qmake_all sub-QtYahooFinanceLib-qmake_all sub-MiscHelpers-qmake_all sub-qhttpserver-qmake_all sub-QtWebServiceApi-qmake_all FORCE
 
-make_first: sub-BackEndApplication-make_first sub-JsonWriter-make_first sub-QTHttpGet-make_first sub-QtYahooFinanceLib-make_first sub-MiscHelpers-make_first sub-qhttpserver-make_first sub-QtWebServiceApi-make_first sub-QtWebServiceApi-make_first  FORCE
-all: sub-BackEndApplication-all sub-JsonWriter-all sub-QTHttpGet-all sub-QtYahooFinanceLib-all sub-MiscHelpers-all sub-qhttpserver-all sub-QtWebServiceApi-all sub-QtWebServiceApi-all  FORCE
-clean: sub-BackEndApplication-clean sub-JsonWriter-clean sub-QTHttpGet-clean sub-QtYahooFinanceLib-clean sub-MiscHelpers-clean sub-qhttpserver-clean sub-QtWebServiceApi-clean sub-QtWebServiceApi-clean  FORCE
-distclean: sub-BackEndApplication-distclean sub-JsonWriter-distclean sub-QTHttpGet-distclean sub-QtYahooFinanceLib-distclean sub-MiscHelpers-distclean sub-qhttpserver-distclean sub-QtWebServiceApi-distclean sub-QtWebServiceApi-distclean  FORCE
+make_first: sub-BackEndApplication-make_first sub-JsonWriter-make_first sub-QTHttpGet-make_first sub-QtYahooFinanceLib-make_first sub-MiscHelpers-make_first sub-qhttpserver-make_first sub-QtWebServiceApi-make_first  FORCE
+all: sub-BackEndApplication-all sub-JsonWriter-all sub-QTHttpGet-all sub-QtYahooFinanceLib-all sub-MiscHelpers-all sub-qhttpserver-all sub-QtWebServiceApi-all  FORCE
+clean: sub-BackEndApplication-clean sub-JsonWriter-clean sub-QTHttpGet-clean sub-QtYahooFinanceLib-clean sub-MiscHelpers-clean sub-qhttpserver-clean sub-QtWebServiceApi-clean  FORCE
+distclean: sub-BackEndApplication-distclean sub-JsonWriter-distclean sub-QTHttpGet-distclean sub-QtYahooFinanceLib-distclean sub-MiscHelpers-distclean sub-qhttpserver-distclean sub-QtWebServiceApi-distclean  FORCE
 	-$(DEL_FILE) Makefile
-install_subtargets: sub-BackEndApplication-install_subtargets sub-JsonWriter-install_subtargets sub-QTHttpGet-install_subtargets sub-QtYahooFinanceLib-install_subtargets sub-MiscHelpers-install_subtargets sub-qhttpserver-install_subtargets sub-QtWebServiceApi-install_subtargets sub-QtWebServiceApi-install_subtargets FORCE
-uninstall_subtargets: sub-BackEndApplication-uninstall_subtargets sub-JsonWriter-uninstall_subtargets sub-QTHttpGet-uninstall_subtargets sub-QtYahooFinanceLib-uninstall_subtargets sub-MiscHelpers-uninstall_subtargets sub-qhttpserver-uninstall_subtargets sub-QtWebServiceApi-uninstall_subtargets sub-QtWebServiceApi-uninstall_subtargets FORCE
+install_subtargets: sub-BackEndApplication-install_subtargets sub-JsonWriter-install_subtargets sub-QTHttpGet-install_subtargets sub-QtYahooFinanceLib-install_subtargets sub-MiscHelpers-install_subtargets sub-qhttpserver-install_subtargets sub-QtWebServiceApi-install_subtargets FORCE
+uninstall_subtargets: sub-BackEndApplication-uninstall_subtargets sub-JsonWriter-uninstall_subtargets sub-QTHttpGet-uninstall_subtargets sub-QtYahooFinanceLib-uninstall_subtargets sub-MiscHelpers-uninstall_subtargets sub-qhttpserver-uninstall_subtargets sub-QtWebServiceApi-uninstall_subtargets FORCE
 
-sub-BackEndApplication-debug:
+sub-BackEndApplication-debug: sub-QtYahooFinanceLib-debug sub-QtWebServiceApi-debug
 	@if not exist BackEndApplication\ mkdir BackEndApplication\ & if not exist BackEndApplication\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd BackEndApplication\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\BackEndApplication\BackEndApplication.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile debug
@@ -597,7 +564,7 @@ sub-QTHttpGet-debug:
 	@if not exist QTHttpGet\ mkdir QTHttpGet\ & if not exist QTHttpGet\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QTHttpGet\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QTHttpGet\QTHttpGet.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile debug
-sub-QtYahooFinanceLib-debug:
+sub-QtYahooFinanceLib-debug: sub-QTHttpGet-debug
 	@if not exist QtYahooFinanceLib\ mkdir QtYahooFinanceLib\ & if not exist QtYahooFinanceLib\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtYahooFinanceLib\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtYahooFinanceLib\QtYahooFinanceLib.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile debug
@@ -609,17 +576,13 @@ sub-qhttpserver-debug:
 	@if not exist qhttpserver\ mkdir qhttpserver\ & if not exist qhttpserver\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd qhttpserver\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\qhttpserver\qhttpserver.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile debug
-sub-QtWebServiceApi-debug:
+sub-QtWebServiceApi-debug: sub-qhttpserver-debug
 	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile debug
-sub-QtWebServiceApi-debug:
-	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
-	@set MAKEFLAGS=$(MAKEFLAGS)
-	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile debug
-debug: sub-BackEndApplication-debug sub-JsonWriter-debug sub-QTHttpGet-debug sub-QtYahooFinanceLib-debug sub-MiscHelpers-debug sub-qhttpserver-debug sub-QtWebServiceApi-debug sub-QtWebServiceApi-debug
+debug: sub-BackEndApplication-debug sub-JsonWriter-debug sub-QTHttpGet-debug sub-QtYahooFinanceLib-debug sub-MiscHelpers-debug sub-qhttpserver-debug sub-QtWebServiceApi-debug
 
-sub-BackEndApplication-release:
+sub-BackEndApplication-release: sub-QtYahooFinanceLib-release sub-QtWebServiceApi-release
 	@if not exist BackEndApplication\ mkdir BackEndApplication\ & if not exist BackEndApplication\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd BackEndApplication\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\BackEndApplication\BackEndApplication.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile release
@@ -631,7 +594,7 @@ sub-QTHttpGet-release:
 	@if not exist QTHttpGet\ mkdir QTHttpGet\ & if not exist QTHttpGet\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QTHttpGet\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QTHttpGet\QTHttpGet.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile release
-sub-QtYahooFinanceLib-release:
+sub-QtYahooFinanceLib-release: sub-QTHttpGet-release
 	@if not exist QtYahooFinanceLib\ mkdir QtYahooFinanceLib\ & if not exist QtYahooFinanceLib\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtYahooFinanceLib\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtYahooFinanceLib\QtYahooFinanceLib.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile release
@@ -643,17 +606,13 @@ sub-qhttpserver-release:
 	@if not exist qhttpserver\ mkdir qhttpserver\ & if not exist qhttpserver\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd qhttpserver\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\qhttpserver\qhttpserver.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile release
-sub-QtWebServiceApi-release:
+sub-QtWebServiceApi-release: sub-qhttpserver-release
 	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile release
-sub-QtWebServiceApi-release:
-	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
-	@set MAKEFLAGS=$(MAKEFLAGS)
-	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile release
-release: sub-BackEndApplication-release sub-JsonWriter-release sub-QTHttpGet-release sub-QtYahooFinanceLib-release sub-MiscHelpers-release sub-qhttpserver-release sub-QtWebServiceApi-release sub-QtWebServiceApi-release
+release: sub-BackEndApplication-release sub-JsonWriter-release sub-QTHttpGet-release sub-QtYahooFinanceLib-release sub-MiscHelpers-release sub-qhttpserver-release sub-QtWebServiceApi-release
 
-sub-BackEndApplication-check:
+sub-BackEndApplication-check: sub-QtYahooFinanceLib-check sub-QtWebServiceApi-check
 	@if not exist BackEndApplication\ mkdir BackEndApplication\ & if not exist BackEndApplication\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd BackEndApplication\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\BackEndApplication\BackEndApplication.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile check
@@ -665,7 +624,7 @@ sub-QTHttpGet-check:
 	@if not exist QTHttpGet\ mkdir QTHttpGet\ & if not exist QTHttpGet\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QTHttpGet\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QTHttpGet\QTHttpGet.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile check
-sub-QtYahooFinanceLib-check:
+sub-QtYahooFinanceLib-check: sub-QTHttpGet-check
 	@if not exist QtYahooFinanceLib\ mkdir QtYahooFinanceLib\ & if not exist QtYahooFinanceLib\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtYahooFinanceLib\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtYahooFinanceLib\QtYahooFinanceLib.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile check
@@ -677,15 +636,11 @@ sub-qhttpserver-check:
 	@if not exist qhttpserver\ mkdir qhttpserver\ & if not exist qhttpserver\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd qhttpserver\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\qhttpserver\qhttpserver.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile check
-sub-QtWebServiceApi-check:
+sub-QtWebServiceApi-check: sub-qhttpserver-check
 	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
 	@set MAKEFLAGS=$(MAKEFLAGS)
 	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile check
-sub-QtWebServiceApi-check:
-	@if not exist QtWebServiceApi\ mkdir QtWebServiceApi\ & if not exist QtWebServiceApi\ exit 1
-	@set MAKEFLAGS=$(MAKEFLAGS)
-	cd QtWebServiceApi\ && ( if not exist Makefile $(QMAKE) "C:\Users\Chris Glynn Pelech\Documents\QTProjects\CPPStockBackend\QtWebServiceApi\QtWebServiceApi.pro" -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile ) && $(MAKE) -f Makefile check
-check: sub-BackEndApplication-check sub-JsonWriter-check sub-QTHttpGet-check sub-QtYahooFinanceLib-check sub-MiscHelpers-check sub-qhttpserver-check sub-QtWebServiceApi-check sub-QtWebServiceApi-check
+check: sub-BackEndApplication-check sub-JsonWriter-check sub-QTHttpGet-check sub-QtYahooFinanceLib-check sub-MiscHelpers-check sub-qhttpserver-check sub-QtWebServiceApi-check
 install:install_subtargets  FORCE
 
 uninstall: uninstall_subtargets FORCE

@@ -3,7 +3,7 @@
 
 #include <QCoreApplication>
 
-#include "QtYahhoFinance/yahoofinance.h"
+#include "QtYahooFinanceLib/QtYahooFinance/yahoofinance.h"
 #include <iostream>
 #include "time.h"
 #include "MiscHelpers/utiltieshelpers.h"

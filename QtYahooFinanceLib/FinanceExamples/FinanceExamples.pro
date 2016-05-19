@@ -9,10 +9,15 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-INCLUDEPATH += ../ \
-    ../../
+INCLUDEPATH += ../../
 
 SOURCES += main.cpp
 
 
-LIBS += -L../lib/ -lQtYahooFinance
+LIBS += -L../lib/
+win32 {
+    debug: LIBS += -lQtYahooFinanced
+    else: LIBS += -lQtYahooFinance
+} else {
+    LIBS += -lQtYahooFinance
+}

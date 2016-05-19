@@ -12,8 +12,6 @@ StockListing::StockListing(std::string name_, std::string sym_):
     myId = id;
 }
 
-
-
 void readFile(std::string file, std::vector<StockListing*>& list)
 {
     CsvReader reader(file);
@@ -29,7 +27,6 @@ void readFile(std::string file, std::vector<StockListing*>& list)
 
         StockListing* temp = new StockListing(name, symbol);
         list.push_back(temp);
-        std::cout<<"id:"<<temp->myId<<std::endl;
     }
 
 }

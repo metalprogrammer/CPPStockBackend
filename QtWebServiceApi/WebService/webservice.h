@@ -9,6 +9,13 @@
 #include <string>
 #include <vector>
 
+/*
+ * QTWebServiceApi
+ * by Christopher Glynn Pelech, 2016
+ * A simple webservervice libary for QT C++
+ */
+
+//Define Lib consts
 #if defined WEBSERVICE_LIBRARY
  #define QT_WEB_SERVICE_API Q_DECL_EXPORT
 #else
